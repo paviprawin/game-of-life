@@ -41,19 +41,19 @@ stages {
       
      }
  }
- stage('Sonarqube') {
-    environment {
-        def scannerHome = tool 'sonarqube';
-    }
-    steps {
-      withSonarQubeEnv('sonarqube') {
-            sh "${scannerHome}/bin/sonar-scanner"
-        }
-        timeout(time: 10, unit: 'MINUTES') {
-          waitForQualityGate abortPipeline: true
-        }
-    }
-}
+ //stage('Sonarqube') {
+    //environment {
+        //def scannerHome = tool 'sonarqube';
+   // }
+    //steps {
+      //withSonarQubeEnv('sonarqube') {
+            //sh "${scannerHome}/bin/sonar-scanner"
+       // }
+        //timeout(time: 10, unit: 'MINUTES') {
+         // waitForQualityGate abortPipeline: true
+        //}
+   // }
+//}
      stage('Artifact upload') {
       steps {
        nexusPublisher nexusInstanceId: '123', nexusRepositoryId: 'releases', packages: [[$class: 'MavenPackage', mavenAssetList: [[classifier: '', extension: '', filePath: '/var/lib/jenkins/workspace/game-of-life/gameoflife-web/target/gameoflife.war
